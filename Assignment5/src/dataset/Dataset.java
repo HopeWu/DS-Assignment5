@@ -46,7 +46,9 @@ public class Dataset {
 			while(probability > 0.05) {
 				int dependencyIndex = randomDependency(i+1, taskNumber, probability);
 				if (dependencyIndex == -1) break;
+				
 				tasks[i].dependencies.add(tasks[dependencyIndex]);
+				
 				probability /= 2;
 			}
 		}

@@ -12,4 +12,9 @@ public class Task {
 	public int daysToFinish = 0;
 	public LocalDate deadline = null;
 	public LinkedList<Task> dependencies = new LinkedList<Task>();
+	
+	@Override
+	public String toString() {
+		return "Task [taskId=" + taskId + ", daysToFinish=" + daysToFinish + ", deadline=" + deadline + "]";
+	}
 }
