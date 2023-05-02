@@ -6,4 +6,13 @@ import java.util.LinkedList;
 public class Project {
 	public LocalDate deadline;
 	public LinkedList<Task> tasks;
+	
+	public Project(Task[] tasks, LocalDate deadline) {
+		super();
+		this.deadline = deadline;
+		this.tasks = new LinkedList<Task>();
+		for( Task task: tasks) {
+			this.tasks.add(task);
+		}
+	}
 }
