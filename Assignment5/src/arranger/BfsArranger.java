@@ -20,7 +20,7 @@ public class BfsArranger extends Arranger{
         return result;
     }
 
-    private void bfs(Task Task){
+    public void bfs(Task Task){
         Queue<Task> queue = new LinkedList<>();
         queue.add(Task);
         HashMap.put(Task, 1);
