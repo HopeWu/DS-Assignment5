@@ -15,4 +15,9 @@ public class Project {
 			this.tasks.add(task);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Project [deadline=" + deadline + ", tasks=" + tasks + "]";
+	}
 }
