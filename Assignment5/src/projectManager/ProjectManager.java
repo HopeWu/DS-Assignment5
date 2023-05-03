@@ -36,7 +36,7 @@ public class ProjectManager {
 			task = arrangedTasks.removeLast();
 			task.deadline = deadline;
 			managedTasks.add(task);
-			deadline.minusDays(task.daysToFinish);
+			deadline = deadline.minusDays(task.daysToFinish);
 		}
 		return managedTasks;
 	}
