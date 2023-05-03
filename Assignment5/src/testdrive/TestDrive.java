@@ -31,7 +31,8 @@ public class TestDrive {
 		ArrayList<Task> orderToDo1 = pm1.manage(project1);
 		// timer ends counting	
 		
-		orderToDo1.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
+		orderToDo1.forEach((node -> System.out.println(node)));
+//		orderToDo1.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
 
 		System.out.println();
 		
@@ -39,7 +40,9 @@ public class TestDrive {
 		ArrayList<Task> orderToDo2 = pm2.manage(project2);
 		// timer ends counting
 		
-		orderToDo2.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
+		orderToDo2.forEach((node -> System.out.println(node)));
+		
+//		orderToDo2.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
 
 		
 		// Create a dataset of size 50 and try these three managers with it
