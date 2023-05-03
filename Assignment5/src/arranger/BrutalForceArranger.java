@@ -13,7 +13,7 @@ import dataset.Task;
  * @author haopengwu
  *
  */
-public class BfsArranger extends Arranger {
+public class BrutalForceArranger extends Arranger {
 
 	private LinkedList<Task> result = new LinkedList<>();
 	private HashMap<Task, Integer> visited = new HashMap<Task, Integer>();
@@ -51,17 +51,18 @@ public class BfsArranger extends Arranger {
 					result.add(task);
 					count += 1;
 					dependencyCount.put(task, -1);
-				}
+				}else
+					// 
+					continue;
 				// delete count for those that has this task as dependency
 				if(dependOn.get(task) == null) continue;
 				for (Task d : dependOn.get(task)) {
-
 					dependencyCount.put(d, (dependencyCount.get(d) - 1));
 					dependOn.get(task);
 				}
 			}
 		}
-//		result.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
+		result.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
 		return result;
 
 	}
