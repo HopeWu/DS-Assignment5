@@ -8,14 +8,19 @@ import dataset.Task;
 
 public abstract class Arranger {
 
-	abstract LinkedList<Task> arrange(LinkedList<Task> tasks);
+	public abstract LinkedList<Task> arrange(LinkedList<Task> tasks);
 	
-	static protected LinkedList<Task> getStarters(LinkedList<Task> projects){
+	/**
+	 * 
+	 * @param tasks
+	 * @return
+	 */
+	static protected LinkedList<Task> getStarters(LinkedList<Task> tasks){
         HashMap<Task, Integer> hashmap = new HashMap<>();
-        for (Task Task: projects){
+        for (Task Task: tasks){
             hashmap.put(Task, 0);
         }
-        for (Task Task: projects){
+        for (Task Task: tasks){
             for( Task task: Task.dependencies){
                 hashmap.put(task, 1);
             }

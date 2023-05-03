@@ -6,35 +6,45 @@ import java.util.HashMap;
 
 import dataset.Task;
 
+/**
+ * The postorder DFS traversal order naturally matches the order of dependence route.
+ * This algorithm makes use of that. The deepest node has no dependency so it 
+ * should be performed first.
+ * @author haopengwu
+ *
+ */
 public class DfsArranger extends Arranger {
 	
-	protected Stack<Task> stack = new Stack<>();
+	protected LinkedList<Task> result = new LinkedList<>();
     private HashMap<Task, Integer> HashMap= new HashMap<Task, Integer>();
 
     @Override
     public LinkedList<Task> arrange(LinkedList<Task> tasks){
-        LinkedList<Task> starters = getStarters(tasks);
-        for (Task Task: starters){
-            dfs(Task);
+        for (Task task: tasks){
+            dfs(task);
         }
-        LinkedList<Task> result = new LinkedList<>();
-        while(!stack.isEmpty()) result.add(stack.pop());
+
+//        result.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
         return result;
     }
 
-    private void dfs(Task Task){
-        if (HashMap.get(Task) != null) return;
-        LinkedList<Task> adjacents = Task.dependencies;
-        if (adjacents.isEmpty()){
-            stack.push(Task);
-            HashMap.put(Task, 1);
+    public void dfs(Task task){
+    	if (task == null) return;
+    	// check if this task it visited before
+        if (HashMap.get(task) != null) return;
+        // get the dependencies of the current task
+        LinkedList<Task> dependencies = task.dependencies;
+        // if the current task has no dependencies, just push it into the stack
+        if (dependencies.isEmpty()){
+            result.add(task);
+            HashMap.put(task, 1);
         }else{
-            for (Task Task1: adjacents){
-                dfs(Task1);
+        	// push the dependencies of this task first before push it into the stack
+            for (Task t: dependencies){
+                dfs(t);
             }
-            stack.push(Task);
-            HashMap.put(Task, 1);
+            result.add(task);
+            HashMap.put(task, 1);
         }
     }
-
 }

@@ -35,8 +35,10 @@ public class Dataset {
 		 * assign the dependencies among them. Always assign dependencies from left to right to avoid loop.
 		 */
 		for (int i = 0; i < taskNumber; i++) {
-			tasks[i].taskId = i;
-			tasks[i].daysToFinish = daysNeed[rand.nextInt(daysNeed.length)];
+			Task task = new Task();
+			
+			task.taskId = i;
+			task.daysToFinish = daysNeed[rand.nextInt(daysNeed.length)];
 			
 			/**
 			 * Around 0.3 chance this task has no dependencies at all.
@@ -44,17 +46,23 @@ public class Dataset {
 			double probability = 0.7;
 			
 			while(probability > 0.05) {
-				int dependencyIndex = randomDependency(i+1, taskNumber, probability);
+				int dependencyIndex = randomDependency(i, probability);
 				if (dependencyIndex == -1) break;
 				
-				tasks[i].dependencies.add(tasks[dependencyIndex]);
+				/** if this dependency already exists, break and finish getting 
+				 * dependency so that one dependency will not be added twice
+				 */
+				if (task.dependencies.contains(tasks[dependencyIndex]))
+					break;
+				task.dependencies.add(tasks[dependencyIndex]);
 				
 				probability /= 2;
 			}
+			tasks[i] = task;
 		}
 		
 		// Randomly generate a deadline
-		Date deadline = new Date(rand.nextLong(now, now - 100000000000L));
+		Date deadline = new Date(rand.nextLong(now, now + 100000000000L));
 		
 		Project project = new Project(tasks, deadline.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		
@@ -68,11 +76,11 @@ public class Dataset {
 	 * @param chance, the probability of getting one
 	 * @return the index of the dependent task on the underlying array
 	 */
-	int randomDependency(int startIndex, int length, double chance){
+	int randomDependency(int currentIndex, double chance){
 		if (chance > 1 || chance < 0) return -1;
-		if (startIndex > length-1) return -1;
+		if (currentIndex == 0) return -1;
 		if (rand.nextInt(10) < chance*10) {
-			return rand.nextInt(startIndex, length);
+			return rand.nextInt(0, currentIndex);
 		}else
 			return -1;
 	}

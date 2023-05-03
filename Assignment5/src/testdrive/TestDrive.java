@@ -1,4 +1,5 @@
 package testdrive;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import arranger.Arranger;
@@ -23,15 +24,25 @@ public class TestDrive {
 		Dataset dataset = new Dataset();
 		
 		// Create a dataset of size 20 and try these three managers with it
-		Project project = dataset.getProjectOf(20);
+		Project project1 = dataset.getProjectOf(5);
+		Project project2 = dataset.getProjectOf(5);
 		
 		// timer starts counting
-		LinkedList<Task> orderToDo1 = pm1.manage(project);
+		ArrayList<Task> orderToDo1 = pm1.manage(project1);
+		// timer ends counting	
+		
+		
+//		for(int i = 0; i < orderToDo1.size(); i++) {
+//			System.out.println(orderToDo1.get(i));
+//		}
+//		
+		// timer starts counting
+		ArrayList<Task> orderToDo2 = pm2.manage(project2);
 		// timer ends counting
 		
-		// timer starts counting
-		LinkedList<Task> orderToDo2 = pm2.manage(project);
-		// timer ends counting
+//		for(int i = 0; i < orderToDo2.size(); i++) {
+//			System.out.println(orderToDo2.get(i));
+//		}
 		
 		// Create a dataset of size 50 and try these three managers with it
 		

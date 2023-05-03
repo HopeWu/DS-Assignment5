@@ -3,18 +3,22 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Task {
-	Task(int taskId, int daysToFinish){
-		this.taskId = taskId;
-		this.daysToFinish = daysToFinish;
+	
+	public Task() {
+		super();
+		this.dependencies = new LinkedList<Task>();
 	}
+
+	// how many days does it take to finish this task
+	public int daysToFinish;
 	// unique in a given project
 	public int taskId;
-	public int daysToFinish = 0;
+	public int task = 0;
 	public LocalDate deadline = null;
-	public LinkedList<Task> dependencies = new LinkedList<Task>();
+	public LinkedList<Task> dependencies;
 	
 	@Override
 	public String toString() {
-		return "Task [taskId=" + taskId + ", daysToFinish=" + daysToFinish + ", deadline=" + deadline + "]";
+		return "Task [taskId=" + taskId + ", daysToFinish=" + daysToFinish + ", deadline=" + deadline + ", dependencies=" + dependencies+"]";
 	}
 }

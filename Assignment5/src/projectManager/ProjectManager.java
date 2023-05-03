@@ -1,7 +1,6 @@
 package projectManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import arranger.Arranger;
@@ -24,10 +23,11 @@ public class ProjectManager {
 	 * @param tasks
 	 * @return
 	 */
-	public LinkedList<Task> manage(Project project) {
-		LinkedList<Task> managedTasks = new LinkedList<Task>();
+	public ArrayList<Task> manage(Project project) {
+		ArrayList<Task> managedTasks = new ArrayList<Task>();
 		// arrange the tasks and order them
 		LinkedList<Task> arrangedTasks = arranger.arrange(project.tasks);
+//		System.out.println(arrangedTasks);
 		
 		// Timing them
 		LocalDate deadline = project.deadline;
