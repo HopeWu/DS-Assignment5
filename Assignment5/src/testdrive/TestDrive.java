@@ -1,6 +1,6 @@
 package testdrive;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import arranger.Arranger;
 import arranger.BrutalForceArranger;
@@ -10,10 +10,16 @@ import dataset.Project;
 import dataset.Task;
 import projectManager.ProjectManager;
 
+
+/**
+ * A test class used to do all the comparison experiments.
+ */
 public class TestDrive {
 	public static void main(String[] args) {
+		
 		// Create two kinds of graphs to be used
 		Arranger bfsArranger = new BrutalForceArranger();
+
 		Arranger dfsArranger = new DfsArranger();
 		
 		// Create two project managers
@@ -23,33 +29,63 @@ public class TestDrive {
 		// Create an instance of Dataset to generate testing data.
 		Dataset dataset = new Dataset();
 		
-		// Create a dataset of size 20 and try these three managers with it
-		Project project1 = dataset.getProjectOf(10);
-		Project project2 = dataset.getProjectOf(10);
+
+		System.out.println("Type, Data Size, Time (ms), Memory (bytes)");
 		
-		// timer starts counting
-		ArrayList<Task> orderToDo1 = pm1.manage(project1);
-		// timer ends counting	
+		for (int dataSize = 10000; dataSize <= 100000; dataSize += 10000) {
+			// Generate a project instance containing N number of tasks
+			Project project = dataset.getProjectOf(dataSize);
+			
+			countTimeMem(pm1, project, "BFS", dataSize);
+			countTimeMem(pm2, project, "DFS", dataSize);
+		}
 		
+
+//		Project project1 = dataset.getProjectOf(5);
+//		Project project2 = dataset.getProjectOf(5);
+//		
+//		// timer starts counting
+//		ArrayList<Task> orderToDo1 = pm1.manage(project1);
+//		// timer ends counting	
+//		
 //		orderToDo1.forEach((node -> System.out.println(node)));
-//		orderToDo1.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
-
-		System.out.println();
-		
-		// timer starts counting
-		ArrayList<Task> orderToDo2 = pm2.manage(project2);
-		// timer ends counting
-		
+////		orderToDo1.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
+//
+//		System.out.println();
+//		
+//		// timer starts counting
+//		ArrayList<Task> orderToDo2 = pm2.manage(project2);
+//		// timer ends counting
+//		
 //		orderToDo2.forEach((node -> System.out.println(node)));
-		
-//		orderToDo2.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
+//		
+////		orderToDo2.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
 
+	}
+	
+	/**
+	 * Counts the time and memory required to arrange a project containing a specified number of tasks
+	 * @param pm 
+	 * @param project A project containing a specified number of tasks
+	 * @param type The type of search algorithms to be used (BFS/DFS)
+	 * @param dataSize The number of tasks to be arranged
+	 */
+	private static void countTimeMem(ProjectManager pm, Project project, String type, int dataSize) {
+		long startTime = System.currentTimeMillis();
 		
-		// Create a dataset of size 50 and try these three managers with it
+		Runtime r = Runtime.getRuntime(); // for memory consumption check
+		r.gc(); // run the garbage collector before experiment
 		
-		// Create a dataset of size 100 and try these three managers with it
+		long startMem = r.totalMemory() - r.freeMemory(); // free memory in the beginning
 		
-		// Create a dataset of size 1000 and try these three managers with it
+		ArrayList<Task> orderToDo = pm.manage(project);	
 		
+	    long endTime = System.currentTimeMillis();
+	    long time = endTime - startTime; // total execution time 
+	    	    
+		long endMem = r.totalMemory() - r.freeMemory(); // free memory in the end
+		long mem= endMem - startMem ; // memory consumption
+		
+		System.out.println(type + ", " + dataSize + ", " + time + ", " + mem);		
 	}
 }
