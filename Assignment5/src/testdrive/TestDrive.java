@@ -1,7 +1,6 @@
 package testdrive;
 
 import java.util.ArrayList;
-
 import arranger.Arranger;
 import arranger.BrutalForceArranger;
 import arranger.DfsArranger;
@@ -9,7 +8,6 @@ import dataset.Dataset;
 import dataset.Project;
 import dataset.Task;
 import projectManager.ProjectManager;
-
 
 /**
  * A test class used to do all the comparison experiments.
@@ -19,7 +17,6 @@ public class TestDrive {
 		
 		// Create two kinds of graphs to be used
 		Arranger bfsArranger = new BrutalForceArranger();
-
 		Arranger dfsArranger = new DfsArranger();
 		
 		// Create two project managers
@@ -29,7 +26,6 @@ public class TestDrive {
 		// Create an instance of Dataset to generate testing data.
 		Dataset dataset = new Dataset();
 		
-
 		System.out.println("Type, Data Size, Time (ms), Memory (bytes)");
 		
 		for (int dataSize = 10000; dataSize <= 100000; dataSize += 10000) {
@@ -38,29 +34,7 @@ public class TestDrive {
 			
 			countTimeMem(pm1, project, "BFS", dataSize);
 			countTimeMem(pm2, project, "DFS", dataSize);
-		}
-		
-
-//		Project project1 = dataset.getProjectOf(5);
-//		Project project2 = dataset.getProjectOf(5);
-//		
-//		// timer starts counting
-//		ArrayList<Task> orderToDo1 = pm1.manage(project1);
-//		// timer ends counting	
-//		
-//		orderToDo1.forEach((node -> System.out.println(node)));
-////		orderToDo1.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
-//
-//		System.out.println();
-//		
-//		// timer starts counting
-//		ArrayList<Task> orderToDo2 = pm2.manage(project2);
-//		// timer ends counting
-//		
-//		orderToDo2.forEach((node -> System.out.println(node)));
-//		
-////		orderToDo2.forEach((node -> {System.out.print(node.taskId); System.out.println(node.dependencies);}));
-
+		}		
 	}
 	
 	/**
