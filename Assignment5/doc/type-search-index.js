@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"arranger","l":"Arranger"},{"p":"arranger","l":"BrutalForceArranger"},{"p":"dataset","l":"Dataset"},{"p":"arranger","l":"DfsArranger"},{"p":"dataset","l":"Project"},{"p":"projectManager","l":"ProjectManager"},{"p":"dataset","l":"Task"},{"p":"testdrive","l":"TestDrive"}];updateSearchResults();
